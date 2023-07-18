@@ -1,6 +1,6 @@
-﻿namespace LocalEndpointManager_Client_Service
+﻿namespace LocalEndpointManager_Server_Service.Services
 {
-    partial class Service1
+    partial class Main_Service
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
