@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocalEndpointManager_InterCommLib\LocalEndpointManager_InterCommLib.csproj">
+      <Project>{12fce9a9-2cde-47d4-bc95-9276b695bd68}</Project>
+      <Name>LocalEndpointManager_InterCommLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
