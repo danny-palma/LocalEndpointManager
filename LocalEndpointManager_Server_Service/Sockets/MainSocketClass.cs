@@ -1,10 +1,13 @@
 ﻿using LocalEndpointManager_InterCommLib;
-﻿using System;
+using LocalEndpointManager_InterCommLib.MessageFormat;
+using LocalEndpointManager_Server_Service.Module;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 
@@ -67,11 +70,11 @@ namespace LocalEndpointManager_Server_Service.Sockets
 
         }
         // Enviar un String al un cliente especifico
-        public static void Send(StateClientObject state, string message)
+        public static void Send(StateClientObject state, MessageFormat Message)
         {
             try
             {
-                byte[] data = Encoding.UTF8.GetBytes(message);
+                byte[] data = ObjectSerializer.Serialize(Message);
 
                 state.socket.BeginSend(data, 0, data.Length, 0, SendCallback, state);
             }
@@ -81,7 +84,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
             }
         }
 
-        public static void SendAll(string message)
+        public static void SendAll(MessageFormat message)
         {
             try
             {
@@ -131,7 +134,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
 
                 Console.WriteLine("Cliente conectado, clientes totales: " + ConnectedClients.Count);
 
-                handler.BeginReceive(state.buffer, 0, BufferSize, 0, ReciveCallback, state);
+                handler.BeginReceive(state.buffer, 0, state.buffer.Length, 0, ReciveCallback, state);
             }
             catch (Exception ex)
             {
@@ -144,21 +147,17 @@ namespace LocalEndpointManager_Server_Service.Sockets
         {
             try
             {
-                string content = string.Empty;
-
                 StateClientObject state = (StateClientObject)ar.AsyncState;
-                Socket handler = state.socket;
 
-                int BytesRead = handler.EndReceive(ar);
+                int BytesRead = state.socket.EndReceive(ar);
 
                 if (BytesRead > 0)
                 {
-                    state.sb.Append(Encoding.UTF8.GetString(state.buffer, 0, BytesRead));
-                    content = state.sb.ToString();
-                    Console.WriteLine(content);
-                    Send(state, "ok");
-                    state.sb.Clear();
-                    handler.BeginReceive(state.buffer, 0, BufferSize, 0, ReciveCallback, state);
+                    MessageFormat Message = ObjectSerializer.Deserialize<MessageFormat>(state.buffer);
+                    Console.WriteLine($"Mensaje recibido de tipo: {Message.TypeMessage}");
+                    CommandModulesManager.ExecuteModule(Message.TypeMessage, Message);
+                    Send(state, new MessageFormat { TypeMessage = "Message", Data = Encoding.UTF8.GetBytes("OK Cliente!") });
+                    state.socket.BeginReceive(state.buffer, 0, state.buffer.Length, 0, ReciveCallback, state);
                 }
                 else
                 {
