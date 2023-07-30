@@ -24,20 +24,8 @@ namespace LocalEndpointManager_Server_Service.Services
         {
 
         }
-        private void MessagesController()
-        {
-            string message = string.Empty;
-            while (message == "exit")
-            {
-                message = Console.ReadLine();
-                MainSocketClass.SendAll(message);
-            }
-        }
         public void StartDebug()
         {
-            Thread thread = new Thread(MessagesController);
-            thread.Start();
-
             OnStart(Array.Empty<string>());
             Console.ReadLine();
             OnStop();
