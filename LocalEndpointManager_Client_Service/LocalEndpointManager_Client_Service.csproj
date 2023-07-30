@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\CommandModulesManager.cs" />
+    <Compile Include="Modules\Commands\MessageCommand.cs" />
+    <Compile Include="Modules\UpdateServer.cs" />
     <Compile Include="Services\Main_Service.cs">
       <SubType>Component</SubType>
     </Compile>
