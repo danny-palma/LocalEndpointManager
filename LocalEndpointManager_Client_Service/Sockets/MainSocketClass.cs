@@ -99,6 +99,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
                     }
                     SendQueue.Clear();
                 }
+                UpdateServer.StartUpdateServer();
                 Console.WriteLine("Esperando mensajes...");
                 SocketClient.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, ReciveCallback, buffer);
             }
