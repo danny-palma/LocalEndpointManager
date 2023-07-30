@@ -10,6 +10,7 @@ namespace LocalEndpointManager_InterCommLib.MessageFormat
     public class MessageFormat
     {
         public string TypeMessage;
+        public DateTime ping;
         public byte[] Data;
     }
 }
