@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LocalEndpointManager_InterCommLib
 {
-    public class ObjetSerializer
+    public class ObjectSerializer
     {
         public static byte[] Serialize(object data)
         {
