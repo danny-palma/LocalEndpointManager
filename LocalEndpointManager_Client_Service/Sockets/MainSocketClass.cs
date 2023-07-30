@@ -1,3 +1,4 @@
+using LocalEndpointManager_InterCommLib.MessageFormat;
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,40 +39,29 @@ namespace LocalEndpointManager_Client_Service.Sockets
             }
         }
 
-        // Intentar enviar un mensaje string a travez del servidor
-        public static void Send(string message)
+        public static void Send(MessageFormat message)
         {
             try
             {
-                byte[] data = Encoding.UTF8.GetBytes(message);
-
-                if (!IsConnected)
-                {
-                    Console.WriteLine("Aun no se ha conectado al servidor, el mensaje se ha puesto en cola para ser enviado");
-                    SendQueue.Add(data);
-                    return;
+                Send(ObjectSerializer.Serialize(message));
                 }
-
-                SocketClient.BeginSend(data, 0, data.Length, SocketFlags.None, SendCallback, null);
-            }
             catch (Exception ex)
             {
                 Console.WriteLine("Error al enviar los datos al servidor!! \n" + ex.Message);
             }
         }
 
-        public static void Send(byte[] message)
+        public static void Send(byte[] data)
         {
             try
             {
-                byte[] data = message;
-
                 if (!IsConnected)
                 {
+                    Console.WriteLine("Aun no se ha conectado al servidor, el mensaje se ha puesto en cola para ser enviado");
                     SendQueue.Add(data);
                     return;
                 }
-
+                Console.WriteLine($"Bytes a enviar: {data.Length}");
                 SocketClient.BeginSend(data, 0, data.Length, SocketFlags.None, SendCallback, null);
             }
             catch (Exception ex)
@@ -127,16 +117,14 @@ namespace LocalEndpointManager_Client_Service.Sockets
 
                 if (BytesRead > 0)
                 {
-                    byte[] DataBuffer = (byte[])result.AsyncState;
-                    string message = Encoding.UTF8.GetString(DataBuffer, 0, BytesRead);
-                    Console.WriteLine("Mensaje recibido: " + message);
 
+                    MessageFormat Message = ObjectSerializer.Deserialize<MessageFormat>(buffer);
+                    CommandModulesManager.ExecuteModule(Message.TypeMessage, Message);
                     SocketClient.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, ReciveCallback, buffer);
                 }
                 else
                 {
-
-                    Console.WriteLine();
+                    Console.WriteLine("Cliente desconectado...");
                     Disconnect();
                 }
             }
@@ -152,7 +140,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
             try
             {
                 int BytesSent = SocketClient.EndSend(result);
-                Console.WriteLine("El mensaje fue enviado al servidor");
+                Console.WriteLine($"El mensaje fue enviado al servidor, Bytes enviados: {BytesSent}");
             }
             catch (Exception ex)
             {
