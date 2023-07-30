@@ -15,12 +15,10 @@ namespace LocalEndpointManager_Server_Service.Sockets
         public int id = 0;
         public Socket socket = null;
         public byte[] buffer = new byte[CommonConstats.BUFFER_SIZE];
-        public StringBuilder sb = new StringBuilder();
     }
     internal class MainSocketClass
     {
         private static readonly ManualResetEvent AllDone = new ManualResetEvent(false);
-        public static readonly int BufferSize = 1024;
         private static readonly int MaxClients = 10;
         public static List<StateClientObject> ConnectedClients = new List<StateClientObject>();
         public static Socket listener = null;
