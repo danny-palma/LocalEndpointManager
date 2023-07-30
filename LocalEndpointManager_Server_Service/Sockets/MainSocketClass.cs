@@ -1,3 +1,4 @@
+﻿using LocalEndpointManager_InterCommLib;
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
     {
         public int id = 0;
         public Socket socket = null;
-        public byte[] buffer = new byte[MainSocketClass.BufferSize];
+        public byte[] buffer = new byte[CommonConstats.BUFFER_SIZE];
         public StringBuilder sb = new StringBuilder();
     }
     internal class MainSocketClass
@@ -28,7 +29,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
         public static void StartServer(string ip, int port)
         {
             Console.WriteLine("Iniciando servidor...");
-            byte[] buffer = new byte[BufferSize];
+            byte[] buffer = new byte[CommonConstats.BUFFER_SIZE];
             listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPAddress iPAddress = IPAddress.Parse(ip);
             IPEndPoint iPEndPoint = new IPEndPoint(iPAddress, port);

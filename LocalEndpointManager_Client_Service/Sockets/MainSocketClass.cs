@@ -1,8 +1,11 @@
+﻿using LocalEndpointManager_Client_Service.Modules;
+using LocalEndpointManager_InterCommLib;
 using LocalEndpointManager_InterCommLib.MessageFormat;
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace LocalEndpointManager_Client_Service.Sockets
@@ -10,7 +13,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
     internal class MainSocketClass
     {
         private static Socket SocketClient;
-        private static readonly byte[] buffer = new byte[1024];
+        private static readonly byte[] buffer = new byte[CommonConstats.BUFFER_SIZE];
         private static List<byte[]> SendQueue = new List<byte[]>();
         public static bool IsConnected
         {
@@ -44,7 +47,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
             try
             {
                 Send(ObjectSerializer.Serialize(message));
-                }
+            }
             catch (Exception ex)
             {
                 Console.WriteLine("Error al enviar los datos al servidor!! \n" + ex.Message);
