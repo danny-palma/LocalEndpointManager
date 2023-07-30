@@ -24,12 +24,7 @@ namespace LocalEndpointManager_Client_Service.Services
         public void StartDebug()
         {
             OnStart(Array.Empty<string>());
-            string command = "";
-            while (command != "Exit")
-            {
-                command = Console.ReadLine();
-                MainSocketClass.Send(command);
-            }
+            Console.ReadLine();
             OnStop();
         }
     }
