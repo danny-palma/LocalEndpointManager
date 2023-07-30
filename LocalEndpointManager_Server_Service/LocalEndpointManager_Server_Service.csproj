@@ -67,6 +67,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Module\CommandModulesManager.cs" />
+    <Compile Include="Module\Commands\MessageCommand.cs" />
+    <Compile Include="Module\Commands\UpdateCommand.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -109,5 +112,6 @@
       <Name>LocalEndpointManager_InterCommLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
