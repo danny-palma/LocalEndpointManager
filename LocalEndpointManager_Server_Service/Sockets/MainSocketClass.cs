@@ -156,7 +156,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
                     MessageFormat Message = ObjectSerializer.Deserialize<MessageFormat>(state.buffer);
                     Console.WriteLine($"Mensaje recibido de tipo: {Message.TypeMessage}");
                     CommandModulesManager.ExecuteModule(Message.TypeMessage, Message);
-                    Send(state, new MessageFormat { TypeMessage = "Message", Data = Encoding.UTF8.GetBytes("OK Cliente!") });
+                    Send(state, new MessageFormat { TypeMessage = "Message", Data = Encoding.UTF8.GetBytes("OK Cliente!"), ping = new DateTime() });
                     state.socket.BeginReceive(state.buffer, 0, state.buffer.Length, 0, ReciveCallback, state);
                 }
                 else
