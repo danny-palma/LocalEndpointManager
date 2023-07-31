@@ -10,6 +10,8 @@ namespace LocalEndpointManager_Client_Service.Services
 {
     public partial class Main_Service : ServiceBase
     {
+        public static string EndpointIP = "127.0.0.1";
+        public static int EndpointPort = 5000;
         public Main_Service()
         {
             InitializeComponent();
@@ -18,8 +20,8 @@ namespace LocalEndpointManager_Client_Service.Services
         protected override void OnStart(string[] args)
         {
             CommandModulesManager.RegisterModule(new MessageCommand());
-            MainSocketClass.Connect("127.0.0.1", 5000);
-            MainSocketClass.Send(new MessageFormat { TypeMessage = "Message", Data = Encoding.UTF8.GetBytes("Hola Servidor!!!") });
+            MainSocketClass.Connect(EndpointIP, EndpointPort);
+            MainSocketClass.Send(new MessageFormat { TypeMessage = "Message", Data = Encoding.UTF8.GetBytes("Hola Servidor!!!"), ping = new DateTime() });
         }
 
         protected override void OnStop()
