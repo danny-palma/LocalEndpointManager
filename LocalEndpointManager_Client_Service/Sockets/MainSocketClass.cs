@@ -1,12 +1,15 @@
 ﻿using LocalEndpointManager_Client_Service.Modules;
+using LocalEndpointManager_Client_Service.Services;
 using LocalEndpointManager_InterCommLib;
 using LocalEndpointManager_InterCommLib.MessageFormat;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 
 namespace LocalEndpointManager_Client_Service.Sockets
 {
@@ -15,6 +18,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
         private static Socket SocketClient;
         private static readonly byte[] buffer = new byte[CommonConstats.BUFFER_SIZE];
         private static List<byte[]> SendQueue = new List<byte[]>();
+        private static int ConnectionTry = 0;
         public static bool IsConnected
         {
             get
@@ -32,6 +36,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
         {
             try
             {
+                ConnectionTry++;
                 Console.WriteLine("Conectando al servidor...");
                 SocketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 SocketClient.BeginConnect(ipAdress, port, ConnectCallBack, null);
@@ -39,6 +44,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine("Error Conectado al servidor: " + ex.Message);
+                VerifyConnection();
             }
         }
 
@@ -51,6 +57,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine("Error al enviar los datos al servidor!! \n" + ex.Message);
+                VerifyConnection();
             }
         }
 
@@ -70,6 +77,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine("Error al enviar los datos al servidor!! \n" + ex.Message);
+                VerifyConnection();
             }
         }
 
@@ -85,6 +93,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine("Error al desconectar! \n" + ex.Message);
+                VerifyConnection();
             }
         }
         // Funcion de callback cuando se conecta con el servidor
@@ -109,6 +118,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine("Error al conectar!! \n" + ex.Message);
+                VerifyConnection();
             }
         }
 
@@ -121,10 +131,8 @@ namespace LocalEndpointManager_Client_Service.Sockets
 
                 if (BytesRead > 0)
                 {
-
                     MessageFormat Message = ObjectSerializer.Deserialize<MessageFormat>(buffer);
                     CommandModulesManager.ExecuteModule(Message.TypeMessage, Message);
-                    SocketClient.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, ReciveCallback, buffer);
                 }
                 else
                 {
@@ -135,6 +143,11 @@ namespace LocalEndpointManager_Client_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine("Error Reciviendo los datos del servidor!! \n", ex.Message);
+                VerifyConnection();
+            }
+            finally
+            {
+                SocketClient.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, ReciveCallback, buffer);
             }
         }
 
@@ -149,6 +162,26 @@ namespace LocalEndpointManager_Client_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine("Error al enviar los datos al servidor!! \n" + ex.Message);
+                VerifyConnection();
+            }
+        }
+
+        private static void VerifyConnection()
+        {
+            if (!IsConnected)
+            {
+                Console.WriteLine("El cliente se ha desconectado!!");
+                Thread.Sleep(60000);
+                if (ConnectionTry <= 3)
+                {
+                    Console.WriteLine("Reintentando Conexion...");
+                    Connect(Main_Service.EndpointIP, Main_Service.EndpointPort);
+                }
+                else
+                {
+                    Console.WriteLine("Se reintento la conexion en varias ocasiones lo cual va a derivar en la salida inesperada del programa");
+                    Environment.Exit(1);
+                }
             }
         }
     }
