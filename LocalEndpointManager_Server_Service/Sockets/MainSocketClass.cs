@@ -39,7 +39,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
             {
                 listener.Bind(iPEndPoint);
                 listener.Listen(MaxClients);
-
+                
                 while (true)
                 {
                     AllDone.Reset();
@@ -60,13 +60,14 @@ namespace LocalEndpointManager_Server_Service.Sockets
             try
             {
                 state.socket.BeginDisconnect(false, DisconnectCallback, state);
+                state.socket.Close();
                 Console.WriteLine($"Desconectando el cliente: {state.id}");
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error cuando se intentaba desconectar al cliente!! \n" + ex.Message);
+                ConnectedClients.Remove(state);
             }
-            ConnectedClients.Remove(state);
 
         }
         // Enviar un String al un cliente especifico
@@ -81,6 +82,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine($"Error enviando el mensaje al cliente con ID: {state.id} \n {ex.Message}");
+                VerifyConnection(state);
             }
         }
 
@@ -102,21 +104,26 @@ namespace LocalEndpointManager_Server_Service.Sockets
 
         private static void DisconnectCallback(IAsyncResult ar)
         {
+            StateClientObject state = (StateClientObject)ar.AsyncState;
             try
             {
-                StateClientObject state = (StateClientObject)ar.AsyncState;
                 state.socket.EndDisconnect(ar);
-                state.socket.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error desconectando el cliente!! " + ex.Message);
+            }
+            finally
+            {
+                ConnectedClients.Remove(state);
+                Console.WriteLine("Cliente eliminado de la lista de clientes conectados");
             }
         }
 
 
         private static void AcceptCallback(IAsyncResult ar)
         {
+            StateClientObject state = null;
             try
             {
                 AllDone.Set();
@@ -124,7 +131,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
                 Socket listener = (Socket)ar.AsyncState;
                 Socket handler = listener.EndAccept(ar);
 
-                StateClientObject state = new StateClientObject
+                state = new StateClientObject
                 {
                     socket = handler
                 };
@@ -139,15 +146,16 @@ namespace LocalEndpointManager_Server_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine("Error Aceptando la conexion del cliente: \n" + ex.Message);
+                VerifyConnection(state);
             }
         }
 
 
         private static void ReciveCallback(IAsyncResult ar)
         {
+            StateClientObject state = (StateClientObject)ar.AsyncState;
             try
             {
-                StateClientObject state = (StateClientObject)ar.AsyncState;
 
                 int BytesRead = state.socket.EndReceive(ar);
 
@@ -169,30 +177,32 @@ namespace LocalEndpointManager_Server_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine("Error reciviendo el mensaje: " + ex.Message);
+                VerifyConnection(state);
             }
         }
 
 
         private static void SendCallback(IAsyncResult ar)
         {
+            StateClientObject state = (StateClientObject)ar.AsyncState;
             try
             {
-                StateClientObject handler = (StateClientObject)ar.AsyncState;
-                int bytesSent = handler.socket.EndSend(ar);
+                int bytesSent = state.socket.EndSend(ar);
                 Console.WriteLine("Mensaje enviado al cliente Bytes enviados: " + bytesSent);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error enviando el mensaje!! \n{ex.Message}");
+                VerifyConnection(state);
             }
         }
 
         private static void VerifyConnection(StateClientObject state)
         {
-            bool connected = state.socket?.Connected == null ? state.socket.Connected : false;
+            bool connected = state.socket?.Connected == null ? false : state.socket.Connected;
             if (!connected)
             {
-                ConnectedClients.Remove(state);
+                DisconnectClient(state);
             }
         }
     }
