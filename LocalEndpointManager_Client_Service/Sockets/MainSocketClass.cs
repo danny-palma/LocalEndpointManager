@@ -86,6 +86,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
         {
             try
             {
+                UpdateServer.StopUpdateServer();
                 SocketClient.Shutdown(SocketShutdown.Both);
                 SocketClient.Close();
                 Console.WriteLine("Desconectado con exito!!");
@@ -93,7 +94,6 @@ namespace LocalEndpointManager_Client_Service.Sockets
             catch (Exception ex)
             {
                 Console.WriteLine("Error al desconectar! \n" + ex.Message);
-                VerifyConnection();
             }
         }
         // Funcion de callback cuando se conecta con el servidor
