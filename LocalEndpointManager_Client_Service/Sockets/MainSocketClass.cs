@@ -171,7 +171,8 @@ namespace LocalEndpointManager_Client_Service.Sockets
         {
             if (!IsConnected)
             {
-                Console.WriteLine("El cliente se ha desconectado!!");
+                Disconnect();
+                Console.WriteLine("El cliente se ha desconectado!! Reintentando conexion en 1 min...");
                 Thread.Sleep(60000);
                 if (ConnectionTry <= 3)
                 {
