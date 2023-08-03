@@ -113,6 +113,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
                 }
                 UpdateServer.StartUpdateServer();
                 Console.WriteLine("Esperando mensajes...");
+                ConnectionTry = 0;
                 SocketClient.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, ReciveCallback, buffer);
             }
             catch (Exception ex)
