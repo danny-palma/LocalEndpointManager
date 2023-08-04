@@ -10,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Policy;
 using System.Text;
 using System.Threading;
+using System.Timers;
 
 namespace LocalEndpointManager_Server_Service.Sockets
 {
@@ -18,6 +19,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
         public int id = 0;
         public Socket socket = null;
         public byte[] buffer = new byte[CommonConstats.BUFFER_SIZE];
+        public string ComputerName = null;
     }
     internal class MainSocketClass
     {
@@ -39,7 +41,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
             {
                 listener.Bind(iPEndPoint);
                 listener.Listen(MaxClients);
-                
+
                 while (true)
                 {
                     AllDone.Reset();
@@ -130,16 +132,44 @@ namespace LocalEndpointManager_Server_Service.Sockets
 
                 Socket listener = (Socket)ar.AsyncState;
                 Socket handler = listener.EndAccept(ar);
+                void AcceptCallbackTimeout(object sender, ElapsedEventArgs e)
+                {
+                    Console.WriteLine("La conexion entrante se cerró por que se supero el tiempo de espera de itentificacion");
+                    handler.Shutdown(SocketShutdown.Both);
+                    handler.Close();
+                }
 
+                System.Timers.Timer timer = new System.Timers.Timer
+                {
+                    Interval = 1000
+                };
+                timer.Elapsed += AcceptCallbackTimeout;
+                timer.Start();
+
+                byte[] data = new byte[1024];
+                int bytesRead = handler.Receive(data);
+
+                timer.Stop();
+
+                string ComputerName = Encoding.UTF8.GetString(data, 0, bytesRead).Trim();
+                
+                if (ConnectedClients.Any(ConnectedClient => ConnectedClient.ComputerName == ComputerName))
+                {
+                    Console.WriteLine("Nombre de pc duplicado, Se va a rechazar la conexion...");
+                    handler.Shutdown(SocketShutdown.Both);
+                    handler.Close();
+                }
+                
                 state = new StateClientObject
                 {
-                    socket = handler
+                    socket = handler,
+                    ComputerName = ComputerName
                 };
-
+                
                 ConnectedClients.Add(state);
                 state.id = ConnectedClients.Count;
 
-                Console.WriteLine("Cliente conectado, clientes totales: " + ConnectedClients.Count);
+                Console.WriteLine($"Cliente conectado, {ComputerName}, clientes totales: {ConnectedClients.Count}");
 
                 handler.BeginReceive(state.buffer, 0, state.buffer.Length, 0, ReciveCallback, state);
             }
