@@ -84,6 +84,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sockets\MainSocketClass.cs" />
+    <Compile Include="Sockets\Modules\Accept.cs" />
+    <Compile Include="Sockets\Modules\DisconnectClient.cs" />
+    <Compile Include="Sockets\Modules\Recive.cs" />
+    <Compile Include="Sockets\Modules\Send.cs" />
+    <Compile Include="Sockets\Modules\StartServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
