@@ -13,7 +13,7 @@ namespace LocalEndpointManager_Server_Service.Module.Commands
         public string ModuleName => "Message";
         public void Exec(MessageFormat Args)
         {
-            Console.WriteLine("EJecutando el comando Mensaje!!");
+            Console.WriteLine("Ejecutando el comando Mensaje!!");
             Console.WriteLine($"Mensaje recivido: {Encoding.UTF8.GetString(Args.Data)}");
         }
     }
