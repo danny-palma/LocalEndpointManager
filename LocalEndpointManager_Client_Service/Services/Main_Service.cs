@@ -5,6 +5,7 @@ using LocalEndpointManager_InterCommLib.MessageFormat;
 using System;
 using System.ServiceProcess;
 using System.Text;
+using System.Threading;
 
 namespace LocalEndpointManager_Client_Service.Services
 {
@@ -21,6 +22,7 @@ namespace LocalEndpointManager_Client_Service.Services
         {
             CommandModulesManager.RegisterModule(new MessageCommand());
             MainSocketClass.Connect(EndpointIP, EndpointPort);
+            Thread.Sleep(1000);
             MainSocketClass.Send(new MessageFormat { TypeMessage = "Message", Data = Encoding.UTF8.GetBytes("Hola Servidor!!!"), ping = new DateTime() });
         }
 

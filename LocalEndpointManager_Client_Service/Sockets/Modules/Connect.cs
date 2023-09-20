@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LocalEndpointManager_Client_Service.Sockets
@@ -39,6 +40,7 @@ namespace LocalEndpointManager_Client_Service.Sockets
                 string ComputerName = Environment.MachineName;
 
                 Send(Encoding.UTF8.GetBytes(ComputerName));
+                Thread.Sleep(1000);
                 if (SendQueue.Count > 0)
                 {
                     for (int i = 0; i < SendQueue.Count; i++)

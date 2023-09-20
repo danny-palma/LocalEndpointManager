@@ -42,7 +42,7 @@ namespace LocalEndpointManager_Server_Service.Sockets
                 }
 
                 timer.Stop();
-
+                handler.Send(Encoding.UTF8.GetBytes("ok"));
                 if (ConnectedClients.Any(ConnectedClient => ConnectedClient.ComputerName == ComputerName))
                 {
                     Console.WriteLine("Nombre de pc duplicado, Se va a rechazar la conexion...");
