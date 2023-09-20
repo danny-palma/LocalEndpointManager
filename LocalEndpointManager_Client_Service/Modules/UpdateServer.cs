@@ -26,7 +26,7 @@ namespace LocalEndpointManager_Client_Service.Modules
         public static void StopUpdateServer()
         {
             StopThread = true;
-            UpsateServerThread.Join();
+            UpsateServerThread?.Join();
             Console.WriteLine("Se ha finalizado la actualizacion del servidor");
         }
 
