@@ -24,7 +24,7 @@ namespace LocalEndpointManager_Client_Service.Modules
                 Command.Exec(Args);
             }
             else
-            {
+            { 
                 Console.WriteLine($"Modulo {Name} no encontrado!!");
             }
         }
