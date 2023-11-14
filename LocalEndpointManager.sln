@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalEndpointManager_Client
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalEndpointManager_InterCommLib", "LocalEndpointManager_InterCommLib\LocalEndpointManager_InterCommLib.csproj", "{12FCE9A9-2CDE-47D4-BC95-9276B695BD68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalEndpointManager_Server_GUI", "LocalEndpointManager_Server_GUI\LocalEndpointManager_Server_GUI.csproj", "{37DC9FFD-A471-4400-B2DF-4416184229D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{12FCE9A9-2CDE-47D4-BC95-9276B695BD68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12FCE9A9-2CDE-47D4-BC95-9276B695BD68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12FCE9A9-2CDE-47D4-BC95-9276B695BD68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37DC9FFD-A471-4400-B2DF-4416184229D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37DC9FFD-A471-4400-B2DF-4416184229D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37DC9FFD-A471-4400-B2DF-4416184229D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37DC9FFD-A471-4400-B2DF-4416184229D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
