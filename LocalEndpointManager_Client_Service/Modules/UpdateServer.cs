@@ -1,4 +1,5 @@
-﻿using LocalEndpointManager_Client_Service.Sockets;
+﻿using LocalEndpointManager_Client_Service.Logger;
+using LocalEndpointManager_Client_Service.Sockets;
 using LocalEndpointManager_InterCommLib;
 using LocalEndpointManager_InterCommLib.MessageFormat;
 using System;
@@ -17,7 +18,7 @@ namespace LocalEndpointManager_Client_Service.Modules
         private static bool StopThread;
         public static void StartUpdateServer()
         {
-            Console.WriteLine("Se ha iniciado la actualizacion del servidor");
+            System_Logger.Log("Se ha iniciado la actualizacion del servidor");
             StopThread = false;
             UpsateServerThread = new Thread(ServerUptade);
             UpsateServerThread.Start();
@@ -27,7 +28,7 @@ namespace LocalEndpointManager_Client_Service.Modules
         {
             StopThread = true;
             UpsateServerThread?.Join();
-            Console.WriteLine("Se ha finalizado la actualizacion del servidor");
+            System_Logger.Log("Se ha finalizado la actualizacion del servidor");
         }
 
         private static void ServerUptade()

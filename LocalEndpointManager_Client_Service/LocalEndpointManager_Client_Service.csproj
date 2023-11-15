@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logger\System_Logger.cs" />
     <Compile Include="Modules\CommandModulesManager.cs" />
     <Compile Include="Modules\Commands\MessageCommand.cs" />
     <Compile Include="Modules\UpdateServer.cs" />

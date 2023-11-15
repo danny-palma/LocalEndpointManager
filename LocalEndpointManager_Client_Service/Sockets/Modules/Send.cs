@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using LocalEndpointManager_Client_Service.Logger;
 
 namespace LocalEndpointManager_Client_Service.Sockets
 {
@@ -14,13 +15,14 @@ namespace LocalEndpointManager_Client_Service.Sockets
         //Funcion para enviar datos en formato MessageFormat
         public static void Send(MessageFormat message)
         {
+            System_Logger.Log($"Enviando mensaje de tipo {message.TypeMessage}");
             try
             {
                 Send(ObjectSerializer.Serialize(message));
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al enviar los datos al servidor!! \n" + ex.Message);
+                System_Logger.Log("Error al enviar los datos al servidor!! \n" + ex.Message);
                 VerifyConnection();
             }
         }
@@ -32,17 +34,17 @@ namespace LocalEndpointManager_Client_Service.Sockets
             {
                 if (!IsConnected)
                 {
-                    Console.WriteLine("Aun no se ha conectado al servidor, el mensaje se ha puesto en cola para ser enviado");
+                    System_Logger.Log("Aun no se ha conectado al servidor, el mensaje se ha puesto en cola para ser enviado");
                     SendQueue.Add(data);
                     return;
                 }
-                Console.WriteLine($"Bytes a enviar: {data.Length}");
+                System_Logger.Log($"Bytes a enviar: {data.Length}");
                 SocketClient.BeginSend(data, 0, data.Length, SocketFlags.None, SendCallback, null);
                 allDone.WaitOne();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al enviar los datos al servidor!! \n" + ex.Message);
+                System_Logger.Log("Error al enviar los datos al servidor!! \n" + ex.Message);
                 VerifyConnection();
             }
         }
@@ -53,12 +55,12 @@ namespace LocalEndpointManager_Client_Service.Sockets
             try
             {
                 int BytesSent = SocketClient.EndSend(result);
-                Console.WriteLine($"El mensaje fue enviado al servidor, Bytes enviados: {BytesSent}");
+                System_Logger.Log($"El mensaje fue enviado al servidor, Bytes enviados: {BytesSent}");
                 allDone.Set();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al enviar los datos al servidor!! \n" + ex.Message);
+                System_Logger.Log("Error al enviar los datos al servidor!! \n" + ex.Message);
                 VerifyConnection();
             }
         }

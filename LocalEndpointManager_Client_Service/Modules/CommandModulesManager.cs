@@ -1,4 +1,5 @@
-﻿using LocalEndpointManager_InterCommLib.Interfaces;
+﻿using LocalEndpointManager_Client_Service.Logger;
+using LocalEndpointManager_InterCommLib.Interfaces;
 using LocalEndpointManager_InterCommLib.MessageFormat;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace LocalEndpointManager_Client_Service.Modules
             }
             else
             { 
-                Console.WriteLine($"Modulo {Name} no encontrado!!");
+                System_Logger.Log($"Modulo {Name} no encontrado!!");
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using LocalEndpointManager_InterCommLib.Interfaces;
+﻿using LocalEndpointManager_Client_Service.Logger;
+using LocalEndpointManager_InterCommLib.Interfaces;
 using LocalEndpointManager_InterCommLib.MessageFormat;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace LocalEndpointManager_Client_Service.Modules.Commands
         public string ModuleName => "Message";
         public void Exec(MessageFormat Args)
         {
-            Console.WriteLine("EJecutando el comando Mensaje!!");
-            Console.WriteLine($"Mensaje recivido: {Encoding.UTF8.GetString(Args.Data)}");
+            System_Logger.Log("EJecutando el comando Mensaje!!");
+            System_Logger.Log($"Mensaje recibido: {Encoding.UTF8.GetString(Args.Data)}");
         }
     }
 }

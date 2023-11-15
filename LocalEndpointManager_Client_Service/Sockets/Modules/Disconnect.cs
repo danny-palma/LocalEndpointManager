@@ -1,4 +1,5 @@
-﻿using LocalEndpointManager_Client_Service.Modules;
+﻿using LocalEndpointManager_Client_Service.Logger;
+using LocalEndpointManager_Client_Service.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,11 @@ namespace LocalEndpointManager_Client_Service.Sockets
                 UpdateServer.StopUpdateServer();
                 SocketClient.Shutdown(SocketShutdown.Both);
                 SocketClient.Close();
-                Console.WriteLine("Desconectado con exito!!");
+                System_Logger.Log("Desconectado con exito!!");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al desconectar! \n" + ex.Message);
+                System_Logger.Log("Error al desconectar! \n" + ex.Message);
             }
         }
 

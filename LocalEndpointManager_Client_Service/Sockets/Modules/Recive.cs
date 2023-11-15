@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using LocalEndpointManager_Client_Service.Logger;
 
 namespace LocalEndpointManager_Client_Service.Sockets
 {
@@ -27,13 +28,13 @@ namespace LocalEndpointManager_Client_Service.Sockets
                 }
                 else
                 {
-                    Console.WriteLine("Cliente desconectado...");
+                    System_Logger.Log("Cliente desconectado...");
                     Disconnect();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error Reciviendo los datos del servidor!! \n", ex.Message);
+                System_Logger.Log("Error Reciviendo los datos del servidor!! \n " + ex.Message);
                 VerifyConnection();
             }
             finally

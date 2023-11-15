@@ -1,4 +1,5 @@
-﻿using LocalEndpointManager_Client_Service.Modules;
+﻿using LocalEndpointManager_Client_Service.Logger;
+using LocalEndpointManager_Client_Service.Modules;
 using LocalEndpointManager_Client_Service.Services;
 using LocalEndpointManager_InterCommLib;
 using LocalEndpointManager_InterCommLib.MessageFormat;
@@ -37,16 +38,16 @@ namespace LocalEndpointManager_Client_Service.Sockets
             if (!IsConnected)
             {
                 Disconnect();
-                Console.WriteLine("El cliente se ha desconectado!! Reintentando conexion en 1 min...");
+                System_Logger.Log("El cliente se ha desconectado!! Reintentando conexion en 1 min...");
                 Thread.Sleep(60000);
                 if (ConnectionTry <= 3)
                 {
-                    Console.WriteLine("Reintentando Conexion...");
+                    System_Logger.Log("Reintentando Conexion...");
                     Connect(Main_Service.EndpointIP, Main_Service.EndpointPort);
                 }
                 else
                 {
-                    Console.WriteLine("Se reintento la conexion en varias ocasiones lo cual va a derivar en la salida inesperada del programa");
+                    System_Logger.Log("Se reintento la conexion en varias ocasiones lo cual va a derivar en la salida inesperada del programa");
                     Environment.Exit(1);
                 }
             }
