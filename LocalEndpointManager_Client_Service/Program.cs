@@ -5,6 +5,7 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace LocalEndpointManager_Client_Service
 {
@@ -16,17 +17,14 @@ namespace LocalEndpointManager_Client_Service
         static void Main()
         {
 #if DEBUG
-            Console.WriteLine("Ejecutando el servidor en modo de depuracion!!");
-            Main_Service Service = new Main_Service();
-            Service.StartDebug();
-#else
+            Debugger.Launch();
+#endif
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
                 new Main_Service()
             };
             ServiceBase.Run(ServicesToRun);
-#endif
         }
     }
 }

@@ -76,4 +76,32 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>@rem some code
+sc stop "LocalEndpointManagerClient" 1:3:2
+if %25ERRORLEVEL%25 neq 0 goto ProcessError
+
+@rem ... other code
+exit /b 0
+
+:ProcessError
+@rem process error
+exit /b 0</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>@rem some code
+SC CREATE "LocalEndpointManagerClient" binpath=$(TargetPath)
+if %25ERRORLEVEL%25 neq 0 goto CatchError
+goto Finally
+
+:CatchError
+@rem process error
+sc config "LocalEndpointManagerClient" binpath=$(TargetPath)
+goto Finally
+
+:Finally
+sc start "LocalEndpointManagerClient"
+echo holaa
+exit /b 0</PostBuildEvent>
+  </PropertyGroup>
 </Project>

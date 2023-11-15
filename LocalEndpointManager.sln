@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalEndpointManager_InterC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalEndpointManager_Server_GUI", "LocalEndpointManager_Server_GUI\LocalEndpointManager_Server_GUI.csproj", "{37DC9FFD-A471-4400-B2DF-4416184229D1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Local Endpoint Manager GUI", "Local Endpoint Manager GUI", "{E9555807-1418-4925-8886-8A5EF08AFAAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Local Endpoint Manager Services", "Local Endpoint Manager Services", "{0FF53BF5-2D88-4CB2-ABC3-1D54BAFB791E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +46,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4448928E-380A-4423-A3A7-A2F166766CFD} = {0FF53BF5-2D88-4CB2-ABC3-1D54BAFB791E}
+		{C2CD0231-B49E-4035-9D48-3301019CB72F} = {E9555807-1418-4925-8886-8A5EF08AFAAA}
+		{A5132623-39BF-43B6-9058-8B4019EA3381} = {0FF53BF5-2D88-4CB2-ABC3-1D54BAFB791E}
+		{37DC9FFD-A471-4400-B2DF-4416184229D1} = {E9555807-1418-4925-8886-8A5EF08AFAAA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CD09754-DDDE-4F67-BB19-3F7AC1E5BB0D}

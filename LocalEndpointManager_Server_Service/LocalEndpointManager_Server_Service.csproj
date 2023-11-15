@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4448928E-380A-4423-A3A7-A2F166766CFD}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>LocalEndpointManager_Server_Service</RootNamespace>
     <AssemblyName>LocalEndpointManager_Server_Service</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -119,4 +119,20 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>@rem some code
+if %25ERRORLEVEL%25 neq 0 goto ProcessError
+net stop "LocalEndpointManagerServer"
+sc delete "LocalEndpointManagerServer"
+@rem ... other code
+exit /b 0
+
+:ProcessError
+@rem process error
+exit /b 1</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>SC CREATE "LocalEndpointManagerServer" binpath=$(TargetPath)
+sc start "LocalEndpointManagerServer"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
