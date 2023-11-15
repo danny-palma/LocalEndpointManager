@@ -91,12 +91,12 @@ namespace LocalEndpointManager_Server_GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon LEMICON48px {
+        internal static System.Drawing.Bitmap LEMICON48px {
             get {
                 object obj = ResourceManager.GetObject("LEMICON48px", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
