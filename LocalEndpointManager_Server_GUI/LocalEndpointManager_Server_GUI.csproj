@@ -115,8 +115,6 @@
     <Compile Include="Views\Settings View\ViewSettings.Designer.cs">
       <DependentUpon>ViewSettings.cs</DependentUpon>
     </Compile>
-    <None Include="Resources\LEMICONHD.png" />
-    <None Include="Resources\LEMICONHD.ico" />
     <EmbeddedResource Include="Views\Connections View\ClientStateButton.resx">
       <DependentUpon>ClientStateButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -188,8 +186,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
