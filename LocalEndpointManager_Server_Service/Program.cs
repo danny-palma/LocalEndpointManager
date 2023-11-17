@@ -1,6 +1,7 @@
 ﻿using LocalEndpointManager_Server_Service.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
@@ -16,10 +17,8 @@ namespace LocalEndpointManager_Server_Service
         static void Main()
         {
 #if DEBUG
-            Console.WriteLine("Ejecutando servicio en modo de deputacion!!, depurando con la consola activa!!");
-            Main_Service ServiceToRun = new Main_Service();
-            ServiceToRun.StartDebug();
-#else
+            Debugger.Launch();
+#endif
             Console.WriteLine("Ejecutando En modo de lanzamiento!!");
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
@@ -28,7 +27,6 @@ namespace LocalEndpointManager_Server_Service
             };
             
             ServiceBase.Run(ServicesToRun);
-#endif
         }
     }
 }

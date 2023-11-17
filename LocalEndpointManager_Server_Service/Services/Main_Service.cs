@@ -40,11 +40,5 @@ namespace LocalEndpointManager_Server_Service.Services
         {
             Host.Close();
         }
-        public void StartDebug()
-        {
-            OnStart(Array.Empty<string>());
-            Console.ReadLine();
-            OnStop();
-        }
     }
 }
