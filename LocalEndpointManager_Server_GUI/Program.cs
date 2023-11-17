@@ -16,7 +16,7 @@ namespace LocalEndpointManager_Server_GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main_View());
+            Application.Run(new Main_Window());
         }
     }
 }
