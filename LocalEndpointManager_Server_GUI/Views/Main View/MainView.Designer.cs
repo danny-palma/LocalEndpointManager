@@ -109,7 +109,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.Image = global::LocalEndpointManager_Server_GUI.Properties.Resources.LEMICONHD;
+            this.pictureBox1.Image = global::LocalEndpointManager_Server_GUI.Properties.Resources.LEMICON48px;
             this.pictureBox1.Location = new System.Drawing.Point(288, 169);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(154, 185);
