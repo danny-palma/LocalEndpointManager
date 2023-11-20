@@ -10,16 +10,14 @@ using System.Windows.Forms;
 
 namespace LocalEndpointManager_Server_GUI.Views.Connections_View
 {
-    public partial class ClientStateButton : UserControl
+    public partial class ClientSelectButton : UserControl
     {
-        public ClientStateButton()
+        public string MachineNameReference;
+        public ClientSelectButton(string machineNameReference)
         {
             InitializeComponent();
-        }
-
-        private void ClientStateButton_Load(object sender, EventArgs e)
-        {
-
+            MachineNameReference = machineNameReference;
+            SelectMachineButton.Text = machineNameReference;
         }
     }
 }
