@@ -35,17 +35,6 @@ namespace LocalEndpointManager_Client_Service.Modules
         {
             while (StopThread == false)
             {
-                Process[] processes = Process.GetProcesses();
-                List<ProcesesInfo> procesesInfos = new List<ProcesesInfo>();
-                foreach (Process process in processes)
-                {
-                    procesesInfos.Add(new ProcesesInfo()
-                    {
-                        name = process.ProcessName,
-                        PID = process.Id
-                    }
-                    );
-                }
                 MessageFormat Message = new MessageFormat
                 {
                     TypeMessage = "Update",

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,18 +10,23 @@ namespace LocalEndpointManager_InterCommLib.MessageFormat
     [Serializable]
     public class SystemUpdate
     {
-        public string Client_Name;
-        public List<ProcesesInfo> Proceses;
-        public SystemUpdate(string Client_Name, List<ProcesesInfo> Proceses)
+        public List<ProcessInfo> Processes = new List<ProcessInfo>();
+        public SystemUpdate(Process[] Proceses)
         {
-            this.Client_Name = Client_Name;
-            this.Proceses = Proceses;
+            foreach (var item in Proceses)
+            {
+                Processes.Add(new ProcessInfo()
+                {
+                    id = item.Id,
+                    Name = item.ProcessName
+                });
+            }
         }
     }
     [Serializable]
-    public class ProcesesInfo
+    public class ProcessInfo
     {
-        public string name;
-        public int PID;
+        public string Name;
+        public int id;
     }
 }

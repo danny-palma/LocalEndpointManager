@@ -1,6 +1,7 @@
 ﻿using LocalEndpointManager_InterCommLib.MessageFormat;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -13,6 +14,6 @@ namespace LocalEndpointManager_Server_Service.GUI_Comunication
     public interface ICommunication
     {
         [OperationContract]
-        string GetConnectedClientsInfo();
+        SortedDictionary<string, List<ProcessInfo>> GetConnectedClientsInfo();
     }
 }
