@@ -15,8 +15,6 @@ namespace LocalEndpointManager_Server_GUI.Views
         public MainView()
         {
             InitializeComponent();
-            ServerService.CommunicationClient communicationClient = new ServerService.CommunicationClient();
-            label1.Text = communicationClient.GetConnectedClientsInfo();
         }
 
         private void label1_Click(object sender, EventArgs e)
