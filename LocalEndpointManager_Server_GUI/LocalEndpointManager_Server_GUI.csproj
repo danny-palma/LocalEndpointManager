@@ -97,11 +97,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Connections View\ClientStateButton.cs">
+    <Compile Include="Views\Connections View\ClientSelectButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Connections View\ClientStateButton.Designer.cs">
-      <DependentUpon>ClientStateButton.cs</DependentUpon>
+    <Compile Include="Views\Connections View\ClientSelectButton.Designer.cs">
+      <DependentUpon>ClientSelectButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Main View\MainView.cs">
       <SubType>Form</SubType>
@@ -127,8 +127,8 @@
     <Compile Include="Views\Settings View\ViewSettings.Designer.cs">
       <DependentUpon>ViewSettings.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\Connections View\ClientStateButton.resx">
-      <DependentUpon>ClientStateButton.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Connections View\ClientSelectButton.resx">
+      <DependentUpon>ClientSelectButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Main View\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
@@ -149,6 +149,14 @@
     <None Include="Connected Services\ServerService\LEMServerService1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServerService\LEMServerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServerService\LEMServerService21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\LocalEndpointManager_InterCommLib.MessageFormat.ProcessInfo.datasource" />
+    <None Include="Properties\DataSources\System.Diagnostics.Process.datasource" />
     <None Include="Resources\LEMICON48px.ico" />
     <None Include="Resources\LEMICON32px.ico" />
     <None Include="Resources\LEMICON24px.ico" />
