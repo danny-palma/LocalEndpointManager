@@ -9,6 +9,7 @@ namespace LocalEndpointManager_InterCommLib.MessageFormat
     [Serializable]
     public class MessageFormat
     {
+        public string NameSender = Environment.MachineName;
         public string TypeMessage;
         public DateTime ping;
         public byte[] Data;
