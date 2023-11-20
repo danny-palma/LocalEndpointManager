@@ -9,6 +9,7 @@ using LocalEndpointManager_Server_Service.Module;
 using LocalEndpointManager_Server_Service.Module.Commands;
 using System.ServiceModel;
 using LocalEndpointManager_Server_Service.GUI_Comunication;
+using System.ServiceModel.Description;
 
 namespace LocalEndpointManager_Server_Service.Services
 {
@@ -23,6 +24,7 @@ namespace LocalEndpointManager_Server_Service.Services
         protected override void OnStart(string[] args)
         {
             CommandModulesManager.RegisterModule(new MessageCommand());
+            CommandModulesManager.RegisterModule(new UpdateCommand());
             // Definir la dirección base del servicio
             Uri baseAddress = new Uri("http://localhost:5050/LEMServerService");
 
