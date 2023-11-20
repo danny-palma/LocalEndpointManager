@@ -30,6 +30,12 @@ namespace LocalEndpointManager_Server_Service.Services
 
             // Crear un ServiceHost para el servicio y usar la dirección base
             Host = new ServiceHost(typeof(GUICommunication), baseAddress);
+
+            ServiceMetadataBehavior smb = Host.Description.Behaviors.Find<ServiceMetadataBehavior>() ?? new ServiceMetadataBehavior();
+            smb.HttpGetEnabled = true;
+            smb.MetadataExporter.PolicyVersion = PolicyVersion.Policy15;
+            Host.Description.Behaviors.Add(smb);
+
             // Configurar el endpoint del servicio
             Host.AddServiceEndpoint(typeof(ICommunication), new BasicHttpBinding(), "");
 
