@@ -22,10 +22,12 @@
     <MetadataSource Address="http://localhost:5050/LEMServerService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="GUICommunication.wsdl" MetadataType="Wsdl" ID="d54631a6-d6ff-406c-b159-6e42b2ad560a" SourceId="1" SourceUrl="http://localhost:5050/LEMServerService?wsdl" />
-    <MetadataFile FileName="LEMServerService.disco" MetadataType="Disco" ID="cc69d161-ac4e-44fa-b46c-6b8d1e771bd6" SourceId="1" SourceUrl="http://localhost:5050/LEMServerService?disco" />
-    <MetadataFile FileName="LEMServerService.xsd" MetadataType="Schema" ID="9f13733c-6a59-4ca1-ae34-d365dbae925d" SourceId="1" SourceUrl="http://localhost:5050/LEMServerService?xsd=xsd1" />
+    <MetadataFile FileName="LEMServerService2.xsd" MetadataType="Schema" ID="0fc5c23c-35c0-49c8-aa73-58c7f65582d0" SourceId="1" SourceUrl="http://localhost:5050/LEMServerService?xsd=xsd2" />
+    <MetadataFile FileName="LEMServerService21.xsd" MetadataType="Schema" ID="da555845-a913-4cc3-b509-b3889b0a9ad2" SourceId="1" SourceUrl="http://localhost:5050/LEMServerService?xsd=xsd3" />
     <MetadataFile FileName="LEMServerService1.xsd" MetadataType="Schema" ID="5d27e871-9047-4398-a378-dce36fe365c2" SourceId="1" SourceUrl="http://localhost:5050/LEMServerService?xsd=xsd0" />
+    <MetadataFile FileName="LEMServerService.xsd" MetadataType="Schema" ID="9f13733c-6a59-4ca1-ae34-d365dbae925d" SourceId="1" SourceUrl="http://localhost:5050/LEMServerService?xsd=xsd1" />
+    <MetadataFile FileName="LEMServerService.disco" MetadataType="Disco" ID="cc69d161-ac4e-44fa-b46c-6b8d1e771bd6" SourceId="1" SourceUrl="http://localhost:5050/LEMServerService?disco" />
+    <MetadataFile FileName="GUICommunication.wsdl" MetadataType="Wsdl" ID="d54631a6-d6ff-406c-b159-6e42b2ad560a" SourceId="1" SourceUrl="http://localhost:5050/LEMServerService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

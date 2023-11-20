@@ -38,7 +38,7 @@ namespace LocalEndpointManager_Client_Service.Modules
                 MessageFormat Message = new MessageFormat
                 {
                     TypeMessage = "Update",
-                    Data = ObjectSerializer.Serialize(new SystemUpdate(Environment.MachineName, procesesInfos)),
+                    Data = ObjectSerializer.Serialize(new SystemUpdate(Process.GetProcesses())),
                     ping = new DateTime()
                 };
 

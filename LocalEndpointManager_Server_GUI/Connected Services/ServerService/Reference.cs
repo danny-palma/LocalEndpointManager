@@ -16,10 +16,10 @@ namespace LocalEndpointManager_Server_GUI.ServerService {
     public interface ICommunication {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunication/GetConnectedClientsInfo", ReplyAction="http://tempuri.org/ICommunication/GetConnectedClientsInfoResponse")]
-        string GetConnectedClientsInfo();
+        System.Collections.Generic.Dictionary<string, LocalEndpointManager_InterCommLib.MessageFormat.ProcessInfo[]> GetConnectedClientsInfo();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunication/GetConnectedClientsInfo", ReplyAction="http://tempuri.org/ICommunication/GetConnectedClientsInfoResponse")]
-        System.Threading.Tasks.Task<string> GetConnectedClientsInfoAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, LocalEndpointManager_InterCommLib.MessageFormat.ProcessInfo[]>> GetConnectedClientsInfoAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,11 +49,11 @@ namespace LocalEndpointManager_Server_GUI.ServerService {
                 base(binding, remoteAddress) {
         }
         
-        public string GetConnectedClientsInfo() {
+        public System.Collections.Generic.Dictionary<string, LocalEndpointManager_InterCommLib.MessageFormat.ProcessInfo[]> GetConnectedClientsInfo() {
             return base.Channel.GetConnectedClientsInfo();
         }
         
-        public System.Threading.Tasks.Task<string> GetConnectedClientsInfoAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, LocalEndpointManager_InterCommLib.MessageFormat.ProcessInfo[]>> GetConnectedClientsInfoAsync() {
             return base.Channel.GetConnectedClientsInfoAsync();
         }
     }
