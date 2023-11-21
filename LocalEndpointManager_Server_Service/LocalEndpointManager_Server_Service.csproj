@@ -95,6 +95,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Post-Build.ps1" />
+    <None Include="Pre-Build.ps1" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -123,31 +125,9 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>@rem some code
-sc stop "LocalEndpointManagerServer" 1:3:2
-if %25ERRORLEVEL%25 neq 0 goto ProcessError
-
-@rem ... other code
-exit /b 0
-
-:ProcessError
-@rem process error
-exit /b 0</PreBuildEvent>
+    <PreBuildEvent>powershell -ExecutionPolicy Bypass -File $(ProjectDir)\Pre-Build.ps1 -serviceName "$(ProjectName)"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>@rem some code
-SC CREATE "LocalEndpointManagerServer" binpath=$(TargetPath)
-if %25ERRORLEVEL%25 neq 0 goto CatchError
-goto Finally
-
-:CatchError
-@rem process error
-sc config "LocalEndpointManagerServer" binpath=$(TargetPath)
-goto Finally
-
-:Finally
-sc start "LocalEndpointManagerServer"
-echo holaa
-exit /b 0</PostBuildEvent>
+    <PostBuildEvent>powershell -ExecutionPolicy Bypass -File  $(ProjectDir)\Post-Build.ps1 -serviceName "$(ProjectName)" -rutaArchivoBinario "$(TargetPath)" -Descripcion "$(SolutionName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
