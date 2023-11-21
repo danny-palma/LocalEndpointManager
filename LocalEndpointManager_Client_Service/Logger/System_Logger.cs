@@ -13,14 +13,22 @@ namespace LocalEndpointManager_Client_Service.Logger
 
         public static void Log(string value, EventLogEntryType type = EventLogEntryType.Information)
         {
-            if (!EventLog.SourceExists("Logs"))
+            try
             {
-                EventLog.CreateEventSource("Logs", "LEM_CLIENT_LOGS");
-            }
 
-            logger.Log = "Logs";
-            logger.Source = "LEM_CLIENT";
-            logger.WriteEntry(value + $"\n\n{Environment.StackTrace}", type);
+                if (!EventLog.SourceExists("Logs"))
+                {
+                    EventLog.CreateEventSource("Logs", "LEM_CLIENT_LOGS");
+                }
+
+                logger.Log = "Logs";
+                logger.Source = "LEM_CLIENT_LOGS";
+                logger.WriteEntry(value + $"\n\n{Environment.StackTrace}", type);
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
