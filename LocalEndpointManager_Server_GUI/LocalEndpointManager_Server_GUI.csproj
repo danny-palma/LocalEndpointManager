@@ -97,11 +97,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ServiceCommunicationPool.cs" />
     <Compile Include="Views\Connections View\ClientSelectButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\Connections View\ClientSelectButton.Designer.cs">
       <DependentUpon>ClientSelectButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Connections View\NoServiceConnection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Connections View\NoServiceConnection.Designer.cs">
+      <DependentUpon>NoServiceConnection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Connections View\ProcessListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Connections View\ProcessListView.Designer.cs">
+      <DependentUpon>ProcessListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Main View\MainView.cs">
       <SubType>Form</SubType>
@@ -129,6 +142,12 @@
     </Compile>
     <EmbeddedResource Include="Views\Connections View\ClientSelectButton.resx">
       <DependentUpon>ClientSelectButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Connections View\NoServiceConnection.resx">
+      <DependentUpon>NoServiceConnection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Connections View\ProcessListView.resx">
+      <DependentUpon>ProcessListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Main View\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>

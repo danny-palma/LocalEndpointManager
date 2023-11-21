@@ -68,6 +68,6 @@
 
         #endregion
 
-        private FontAwesome.Sharp.IconButton SelectMachineButton;
+        public FontAwesome.Sharp.IconButton SelectMachineButton;
     }
 }
